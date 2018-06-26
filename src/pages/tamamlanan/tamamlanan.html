@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+  	<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Tamamlanan Arızalar</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="bg">
+	<button ion-button *ngFor="let defect of defects" block color="white" class="btn" (click)="display(defect)">
+		<ion-grid class="fill">
+			<ion-row>
+				<ion-col col-6 text-left>
+					<b>{{defect.title}}</b><br>
+					{{defect.issue}}<br>
+					İlgili Kişi
+				</ion-col>
+				<ion-col col-6 text-right>
+					{{defect.date}}<br>
+					{{defect.status}}<br>
+					{{defect.person}}
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</button>
+	<br><button ion-button outline block style="text-transform: none">Önceki Günleri Yükle</button>
+</ion-content>

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+  	<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Onarım Formu</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="bg">
+	<div *ngFor="let content of contents" style="background-color: #ffffff">
+		<ion-item style="padding-left: 10px" no-lines>{{content.category}}</ion-item>
+		<button text-left ion-button block color="gray" style="text-transform: none;" (click)="presentPopover($event, content)">{{content.choosed}}</button>
+	</div>
+		<ion-item no-lines>
+			Açıklama<br>{{explanation}}<br>Açıklama Ekle
+		</ion-item>
+		<ion-textarea cols="50" rows="5" style="border:solid 2px gray; border-radius: 3px;"></ion-textarea><br>
+		<button ion-button block style="text-transform: none;">Kaydet</button>
+</ion-content>

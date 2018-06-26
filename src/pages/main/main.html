@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Anasayfa</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+	<button ion-button *ngFor="let btnMain of buttons" block color="{{btnMain.color}}" (click)="openPage(btnMain)" class="btn">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <div text-left>{{btnMain.upper}}<br>{{btnMain.lower}}</div>
+                </ion-col>
+                <ion-col>
+                    <div text-right class="big">{{btnMain.value}}</div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </button>
+</ion-content>

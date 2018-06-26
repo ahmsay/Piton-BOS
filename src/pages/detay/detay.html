@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Arıza Detayı</ion-title>
+    <ion-buttons end *ngIf="show == 'true'">
+      <button ion-button icon-only (click)="openOnar()">
+        <ion-icon name="build"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="bg" padding>
+	<ion-segment [(ngModel)]="category" color="primary">
+    	<ion-segment-button value="record">
+      		Arıza Kaydı
+    	</ion-segment-button>
+    	<ion-segment-button value="info">
+      		Onarım Bilgisi
+    	</ion-segment-button>
+  	</ion-segment><br>
+  	<div [ngSwitch]="category" swipeSegment [tabsList]="categories" [(currentTab)]="category" (tabChanged)="onTabChanged($event)" class="swipe-area" class="swipe-area">
+  		<ion-list class="back" *ngSwitchCase="'record'">
+  			<ion-list style="border:solid 1px #f2f2f2; border-radius: 2px;" padding no-margin *ngFor="let element of map">
+            <span class="left"><b>{{element.key}}</b></span>
+            <span class="right">{{element.value}}</span><br>
+  			</ion-list>
+  		</ion-list>
+  		<ion-list class="back" *ngSwitchCase="'info'">
+    		<ion-list style="border:solid 1px #f2f2f2; border-radius: 2px;" padding no-margin *ngFor="let element of map2">
+            <span class="left"><b>{{element.key}}</b></span>
+            <span class="right">{{element.value}}</span><br>
+        </ion-list>
+  		</ion-list>
+	  </div>
+</ion-content>
