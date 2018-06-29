@@ -21,12 +21,11 @@ export class BekleyenPage {
     console.log('ionViewDidLoad BekleyenPage');
   }
 
-  display(defect) {
-    /*this.navCtrl.push(DetayPage, {
-      defect: defect,
+  display(id) {
+    this.navCtrl.push(DetayPage, {
+      id: id,
       show: 'true'
-    });*/
-    console.log(defect);
+    });
   }
 
   getValues() {
@@ -35,8 +34,6 @@ export class BekleyenPage {
       let len = this.global.data.length;
       for (var i=0; i<len; i++) {
         this.defects.push(this.global.data[i]);
-        var x = this.defects[i].TARIH.substring(0,10);
-        this.defects[i].TARIH = x;
       }
     });
   }

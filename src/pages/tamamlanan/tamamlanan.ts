@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { GlobalProvider } from "../../providers/global/global";
+import { DatePipe } from '@angular/common';
 
 import { DetayPage } from '../detay/detay';
 
@@ -9,24 +11,52 @@ import { DetayPage } from '../detay/detay';
   templateUrl: 'tamamlanan.html',
 })
 export class TamamlananPage {
-	defects: Array<{title: string, issue: string, date: string, status: string, person: string}>;
+	defects: any;
+  day: number = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	this.defects = [
-  		{title: 'Dikimevi PTT-4036', issue:'Kiosk İşlem Almıyor', date: '19.06.2018 09:49', status: 'Arıza Giderildi', person:'Çagri Karatas'},
-      	{title: 'Saruhanlı Maski-7002', issue:'Pos Cihazı Arızası', date: '19.06.2018 09:10', status: 'Arıza Giderildi', person:'Ferhat Yertutan'}
-  	];
+  constructor(public datepipe: DatePipe, public global: GlobalProvider, public navCtrl: NavController, public navParams: NavParams) {
+    this.loadToday();
+  	this.defects = [];
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad TamamlananPage');
   }
 
-  display(defect) {
-  	this.navCtrl.push(DetayPage, {
-  		defect: defect,
+  display(id) {
+    this.navCtrl.push(DetayPage, {
+      id: id,
       show: 'false'
-  	});
+    });
   }
 
+  loadToday() {
+    let today = new Date();
+    let tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate()+1);
+    let baslangic = this.datepipe.transform(today, 'MM.dd.yyyy');
+    let bitis = this.datepipe.transform(tomorrow, 'MM.dd.yyyy');
+    this.getValues(baslangic, bitis);
+  }
+
+  loadPrevious() {
+    this.day++;
+    let today = new Date();
+    let yesterday = new Date(today);
+    yesterday.setDate(today.getDate()-this.day);
+    today.setDate(yesterday.getDate()+1);
+    let baslangic = this.datepipe.transform(yesterday, 'MM.dd.yyyy');
+    let bitis = this.datepipe.transform(today, 'MM.dd.yyyy');
+    this.getValues(baslangic, bitis);
+  }
+
+  getValues(baslangic, bitis) {
+    this.global.getData('/ariza/tamamlanan/mobil?baslangic=' + baslangic + '&bitis=' + bitis)
+    .then(data => {
+      let len = this.global.data.length;
+      for (var i=0; i<len; i++) {
+        this.defects.push(this.global.data[i]);
+      }
+    });
+  }
 }
