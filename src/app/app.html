@@ -6,10 +6,19 @@
   </ion-header>
 
   <ion-content class="tb">
-    <ion-list *ngIf="global.loggedin">
+    <ion-list>
       <div *ngFor="let p of pages">
         <button class="tb" no-lines *ngIf="p.show == '1'" ion-item (click)="managePage(p)">
-          {{p.title}}
+          <ion-grid no-padding>
+            <ion-row>
+              <ion-col>
+                <ion-icon name="{{p.icon}}"></ion-icon>
+              </ion-col>
+              <ion-col col-10>
+                {{p.title}}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
         </button>
       </div>
     </ion-list>

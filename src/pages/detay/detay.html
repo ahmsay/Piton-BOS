@@ -21,7 +21,7 @@
       		Onarım Bilgisi
     	</ion-segment-button>
   	</ion-segment><br>
-  	<div [ngSwitch]="category" swipeSegment [tabsList]="categories" [(currentTab)]="category" (tabChanged)="onTabChanged($event)" class="swipe-area" class="swipe-area">
+  	<div [ngSwitch]="category" swipeSegment [tabsList]="categories" [(currentTab)]="category" (tabChanged)="onTabChanged($event)" class="swipe-area">
   		<ion-list class="back" *ngSwitchCase="'record'">
   			<ion-list style="border:solid 1px #f2f2f2; border-radius: 2px;" padding no-margin *ngFor="let element of map">
             <span class="left"><b>{{element.key}}</b></span>

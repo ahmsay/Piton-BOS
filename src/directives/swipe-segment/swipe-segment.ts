@@ -15,7 +15,6 @@ export class SwipeSegmentDirective implements OnInit {
 
     constructor(public _el: ElementRef) {
         this.el = _el.nativeElement;
-        console.log("asd");
     }
 
     ngOnInit() {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { GlobalProvider } from "../../providers/global/global";
 
 import { DetayPage } from '../detay/detay';
 
@@ -9,13 +10,11 @@ import { DetayPage } from '../detay/detay';
   templateUrl: 'bekleyen.html',
 })
 export class BekleyenPage {
-	defects: Array<{title: string, issue: string, date: string, status: string, person: string}>;
+	defects: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	this.defects = [
-  		{title: 'Erdem Tahsilat-2014', issue:'Kiosk İşlem Almıyor', date: '19.06.2018 10:10', status: 'Çalışmaya Devam Ediyor', person:'Murat Aslan'},
-      {title: '100.Yıl Merkez Çarşı 7/24-4048', issue:'Pos Cihazı Arızası', date: '19.06.2018 10:35', status: 'Yeni', person:'Çagri Karatas'}
-  	];
+  constructor(public global: GlobalProvider, public navCtrl: NavController, public navParams: NavParams) {
+    this.getValues();
+  	this.defects = [];
   }
 
   ionViewDidLoad() {
@@ -23,10 +22,22 @@ export class BekleyenPage {
   }
 
   display(defect) {
-    this.navCtrl.push(DetayPage, {
+    /*this.navCtrl.push(DetayPage, {
       defect: defect,
       show: 'true'
-    });
+    });*/
+    console.log(defect);
   }
 
+  getValues() {
+    this.global.getData('/ariza/bekleyen/mobil')
+    .then(data => {
+      let len = this.global.data.length;
+      for (var i=0; i<len; i++) {
+        this.defects.push(this.global.data[i]);
+        var x = this.defects[i].TARIH.substring(0,10);
+        this.defects[i].TARIH = x;
+      }
+    });
+  }
 }

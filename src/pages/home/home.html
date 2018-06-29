@@ -10,11 +10,11 @@
 <ion-content padding>
     <div style="border: 2px solid #f2f2f2; border-radius: 3px;">
         <ion-item>
-            <ion-input type="text" #email placeholder="Kullanıcı Adı"></ion-input>
+            <ion-input type="text" [(ngModel)]="uname" placeholder="Kullanıcı Adı"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input type="password" #password placeholder="Şifre"></ion-input>
+            <ion-input type="password" [(ngModel)]="passw" placeholder="Şifre"></ion-input>
         </ion-item>
     </div><br>
-    <button ion-button block style="text-transform: none" (click)="login()">Giriş Yap</button>
+    <button ion-button block style="text-transform: none" (click)="login(uname, passw)">Giriş Yap</button>
 </ion-content>

@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, MenuController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { GlobalProvider } from "../providers/global/global";
-import { AngularFireAuth } from 'angularfire2/auth';
 
 import { HomePage } from '../pages/home/home';
 import { ArızaPage } from '../pages/arıza/arıza';
@@ -19,21 +18,21 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any, show: string}>;
+  pages: Array<{title: string, component: any, show: string, icon: string}>;
   subPages: Array<{title: string, component: any, show: string}>;
 
-  constructor(public menu: MenuController, public fire: AngularFireAuth, public platform: Platform, public splashScreen: SplashScreen, public global: GlobalProvider) {
+  constructor(public global: GlobalProvider, public menu: MenuController, public platform: Platform, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     this.subPages = [];
     this.pages = [
-      { title: 'Anasayfa', component: MainPage, show: '1' },
-      { title: 'Arıza İşlemleri', component: null, show: '1' },
-      { title: 'Arıza Oluştur', component: ArızaPage, show: '0' },
-      { title: 'Bekleyen Arızalar', component: BekleyenPage, show: '0' },
-      { title: 'Tamamlanan Arızalar', component: TamamlananPage, show: '0' },
-      { title: 'Yardım', component: YardımPage, show: '1' },
-      { title: 'Çıkış Yap', component: null, show: '1'}
+      { title: 'Anasayfa', component: MainPage, show: '1', icon:'home' },
+      { title: 'Arıza İşlemleri', component: null, show: '1', icon:'add'  },
+      { title: 'Arıza Oluştur', component: ArızaPage, show: '0', icon:'arrow-dropright'  },
+      { title: 'Bekleyen Arızalar', component: BekleyenPage, show: '0', icon:'arrow-dropright'  },
+      { title: 'Tamamlanan Arızalar', component: TamamlananPage, show: '0', icon:'arrow-dropright'  },
+      { title: 'Yardım', component: YardımPage, show: '1', icon:'help-buoy' },
+      { title: 'Çıkış Yap', component: null, show: '1', icon:'close' }
     ];
 
     this.subPages.push(this.pages[2]);
@@ -72,7 +71,7 @@ export class MyApp {
   }
 
   logout() {
-    this.fire.auth.signOut();
+    localStorage.setItem('logged', '0');
     this.global.loggedin = false;
     this.nav.setRoot(HomePage);
   }

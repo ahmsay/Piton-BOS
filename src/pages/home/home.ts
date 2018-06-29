@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, NavController, MenuController, AlertController } from 'ionic-angular';
 import { GlobalProvider } from "../../providers/global/global";
+import { HTTP } from '@ionic-native/http';
 
-import { AngularFireAuth } from 'angularfire2/auth';
 import { MainPage } from '../main/main';
 
 @Component({
@@ -11,32 +11,39 @@ import { MainPage } from '../main/main';
 })
 export class HomePage {
 	@ViewChild(Nav) nav: Nav;
-  @ViewChild('email') email;
-  @ViewChild('password') password;
 
-  constructor(private alertCtrl: AlertController, public fire: AngularFireAuth, public menu: MenuController, public navCtrl: NavController, public global: GlobalProvider) {
+  constructor(public http: HTTP, public alertCtrl: AlertController, public menu: MenuController, public navCtrl: NavController, public global: GlobalProvider) {
     this.menu.swipeEnable(this.global.loggedin);
+    if (this.global.loggedin)
+      this.navCtrl.setRoot(MainPage);
   }
 
-  alert(message: string) {
+  alert(message: string, title: string) {
     this.alertCtrl.create({
-      title: 'Bilgi',
+      title: title,
       subTitle: message,
       buttons: ['Tamam']
     }).present();
   }
 
-  login() {
-      this.fire.auth.signInWithEmailAndPassword(this.email.value, this.password.value)
-      .then(data => {
-         this.navCtrl.setRoot(MainPage);
-         this.global.loggedin = true;
-         var x = this.email.value.split("@", 1);
-         this.global.username = x;
-      })
-      .catch(error => {
-         this.alert(error.message);
-      })
+  login(uname: string, passw: string) {
+    let url = 'http://185.183.168.175:8080/onarimapi/token';
+    let body = {
+      grant_type: 'password',
+      password: passw,
+      username: uname
+    }
+    this.http.post(url, body, {'Content-Type': 'application/x-www-form-urlencoded'})
+    .then((data) => {
+      localStorage.setItem('logged', '1');
+      let x = JSON.parse(data.data);
+      localStorage.setItem('token', x.access_token);
+      console.log(data);
+      this.navCtrl.setRoot(MainPage);
+    })
+    .catch((error) => {
+      this.alert('Giriş bilgilerinizi kontrol ediniz.', 'Hata');
+    })
   }
 
 }
