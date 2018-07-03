@@ -10,18 +10,18 @@ import { PopoverPage } from '../popover/popover';
   templateUrl: 'arıza.html',
 })
 export class ArızaPage {
-	contents: Array<{selections: string[], choosed: string, required: number, next: number[], url: string, IDs: string[]}>;
+	contents: Array<{selections: string[], choosed: string, required: number, next: number[], activate: number[], url: string, IDs: string[]}>;
   display: number = 0;
   persons: string[] = [];
   saveable: boolean;
 
   constructor(public global:GlobalProvider, public popoverCtrl: PopoverController, public navCtrl: NavController, public navParams: NavParams) {
   	this.contents = [
-  		{selections: ['Lütfen İl Seçiniz'], choosed: 'Lütfen İl Seçiniz', required: 0, next: [0,1,2,3,4], url: '/ariza?sorgu=liste&durum=il', IDs: ['-1']},
-  		{selections: ['Lütfen Kurum Seçiniz'], choosed: 'Lütfen Kurum Seçiniz', required: 1, next: [1,2,3,4], url: '/ariza?sorgu=liste&durum=kurum&id=', IDs: ['-1']},
-  		{selections: ['Lütfen Cihaz Seçiniz'], choosed: 'Lütfen Cihaz Seçiniz', required: 2, next: [2], url: '/ariza?sorgu=liste&durum=cihaz&id=', IDs: ['-1']},
-  		{selections: ['Lütfen Arıza Türü Seçiniz'], choosed: 'Lütfen Arıza Türü Seçiniz', required: 2, next: [3,4], url: '/ariza?sorgu=liste&durum=ariza_tur&id=', IDs: ['-1']},
-  		{selections: ['Lütfen Arıza Çözümünü Seçiniz'], choosed: 'Lütfen Arıza Çözümünü Seçiniz', required: 4, next: [4], url: '/ariza?sorgu=liste&durum=ariza_cozum&id=', IDs: ['-1']}
+  		{selections: ['Lütfen İl Seçiniz'], choosed: 'Lütfen İl Seçiniz', required: 0, next: [0,1,2,3,4], activate: [1], url: '/ariza?sorgu=liste&durum=il', IDs: ['-1']},
+  		{selections: ['Lütfen Kurum Seçiniz'], choosed: 'Lütfen Kurum Seçiniz', required: 1, next: [1,2,3,4], activate: [2,3], url: '/ariza?sorgu=liste&durum=kurum&id=', IDs: ['-1']},
+  		{selections: ['Lütfen Cihaz Seçiniz'], choosed: 'Lütfen Cihaz Seçiniz', required: 2, next: [2], activate: [], url: '/ariza?sorgu=liste&durum=cihaz&id=', IDs: ['-1']},
+  		{selections: ['Lütfen Arıza Türü Seçiniz'], choosed: 'Lütfen Arıza Türü Seçiniz', required: 2, next: [3,4], activate: [4], url: '/ariza?sorgu=liste&durum=ariza_tur&id=', IDs: ['-1']},
+  		{selections: ['Lütfen Arıza Çözümünü Seçiniz'], choosed: 'Lütfen Arıza Çözümünü Seçiniz', required: 4, next: [4], activate: [], url: '/ariza?sorgu=liste&durum=ariza_cozum&id=', IDs: ['-1']}
   	];
     this.getPersons();
     this.getValues(0, '', 'ISIM');
@@ -42,14 +42,9 @@ export class ArızaPage {
             let index = content.selections.indexOf(data);
             let id = content.IDs[index];
             this.cancelAfter(content);
-            if (content.choosed == content.selections[0]) {
-              this.display = (this.contents.indexOf(content)) + 1;
-            }
-            for (let i of this.contents) {
-              if (this.display == i.required) {
-                let j = this.contents.indexOf(i);
-                this.getValues(j, id, 'AD');
-              }
+            for (let i of content.activate) {
+                this.getValues(i, id, 'AD');
+                this.display = i;
             }
           } else {
             this.cancelAfter(content);
@@ -86,7 +81,8 @@ export class ArızaPage {
   }
 
   cancelAfter(content) {
-    this.display = this.contents.indexOf(content);
+    if (content.activate.length != 0)
+      this.display = this.contents.indexOf(content);
     for (let i of content.next)
       this.contents[i].choosed = this.contents[i].selections[0];
   }

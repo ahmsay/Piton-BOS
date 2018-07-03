@@ -8,21 +8,21 @@
 </ion-header>
 
 <ion-content padding class="bg">
-	<button ion-button *ngFor="let defect of defects" block color="white" class="btn" (click)="display(defect.TABLEID)">
-		<ion-grid class="fill">
+	<div *ngFor="let defect of defects" block (click)="display(defect.TABLEID)">
+		<ion-grid class="btn">
 			<ion-row>
-				<ion-col col-6 text-left>
-					<b>{{defect.CIHAZ}}</b><br>
-					{{defect.ARIZATUR}}<br>
-					İlgili Kişi
-				</ion-col>
-				<ion-col col-6 text-right>
-					{{defect.TARIH | date: 'dd.MM.yyyy HH:mm'}}<br>
-					{{defect.DURUM}}<br>
-					{{defect.ILGILIKISI}}
-				</ion-col>
+				<ion-col><b>{{defect.CIHAZ}}</b></ion-col>
+				<ion-col col-5 text-right>{{defect.TARIH | date: 'dd.MM.yyyy HH:mm'}}</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>{{defect.ARIZATUR}}</ion-col>
+				<ion-col text-right>{{defect.DURUM}}</ion-col>
+			</ion-row>
+			<ion-row>
+				<ion-col>İlgili Kişi</ion-col>
+				<ion-col col-5 text-right>{{defect.ILGILIKISI}}</ion-col>
 			</ion-row>
 		</ion-grid>
-	</button>
+	</div>
 	<br><button ion-button outline block style="text-transform: none" (click)="loadPrevious()">Önceki Günleri Yükle</button>
 </ion-content>

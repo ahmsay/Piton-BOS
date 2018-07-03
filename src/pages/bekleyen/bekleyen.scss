@@ -1,10 +1,13 @@
 page-bekleyen {
 	.btn {
-  	height: 60px;
-  	text-transform: none;
-  	font-size: 13px;
-  	font-family: Calibri;
+  	margin-bottom: 10px;
+    background-color: #ffffff;
+    border-radius: 3px;
 	}
+
+  .btn:active {
+    background-color: #e2e2e2;
+  }
 
 	.bg {
   	background-color: #f2f2f2;

@@ -65,9 +65,8 @@ export class MyApp {
   }
 
   changeShow() {
-    for (let p of this.subPages) {
+    for (let p of this.subPages)
       p.show = (p.show == '1') ? (p.show = '0') : (p.show = '1');
-    }
   }
 
   logout() {

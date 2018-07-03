@@ -1,21 +1,16 @@
 page-detay {
-	.right{
-    float:right;
-    font-family: Calibri;
-    color: gray;
-	}
-
-	.left{
-    float:left;
-    font-family: Calibri;
+	.items {
+		border:solid 1px #f2f2f2;
+		border-radius: 2px;
+		padding: 10px;
 	}
 
 	.back{
-	background-color: #ffffff;
+		background-color: #ffffff;
 	}
 
 	.swipe-area {
-    height:100%;
-    width:100%;
+    	height:100%;
+    	width:100%;
   	}
 }

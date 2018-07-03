@@ -12,7 +12,6 @@ import { OnarımPage } from '../onarım/onarım';
 })
 export class DetayPage {
   id: number;
-	detail: string;
 	map: Array<{key: string, value: any}>;
   map2: Array<{key: string, value: any}>;
   show: string;
@@ -23,7 +22,6 @@ export class DetayPage {
   	this.id = navParams.get('id');
     this.show = navParams.get('show');
     this.getValues(this.id);
-  	this.detail = 'record';
   }
 
   ionViewDidLoad() {

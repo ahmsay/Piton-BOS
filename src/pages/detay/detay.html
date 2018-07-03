@@ -23,16 +23,28 @@
   	</ion-segment><br>
   	<div [ngSwitch]="category" swipeSegment [tabsList]="categories" [(currentTab)]="category" (tabChanged)="onTabChanged($event)" class="swipe-area">
   		<ion-list class="back" *ngSwitchCase="'record'">
-  			<ion-list style="border:solid 1px #f2f2f2; border-radius: 2px;" padding no-margin *ngFor="let element of map">
-            <span class="left"><b>{{element.key}}</b></span>
-            <span class="right">{{element.value}}</span><br>
-  			</ion-list>
+  			<ion-grid class="items" *ngFor="let element of map">
+          <ion-row>
+            <ion-col>
+              <b>{{element.key}}</b>
+            </ion-col>
+            <ion-col text-right>
+              {{element.value}}
+            </ion-col>
+          </ion-row>
+  			</ion-grid>
   		</ion-list>
   		<ion-list class="back" *ngSwitchCase="'info'">
-    		<ion-list style="border:solid 1px #f2f2f2; border-radius: 2px;" padding no-margin *ngFor="let element of map2">
-            <span class="left"><b>{{element.key}}</b></span>
-            <span class="right">{{element.value}}</span><br>
-        </ion-list>
+    		<ion-grid class="items" *ngFor="let element of map2">
+          <ion-row>
+            <ion-col>
+              <b>{{element.key}}</b>
+            </ion-col>
+            <ion-col text-right>
+              {{element.value}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
   		</ion-list>
 	  </div>
 </ion-content>
