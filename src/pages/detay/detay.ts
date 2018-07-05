@@ -17,6 +17,7 @@ export class DetayPage {
   show: string;
   public category: string = 'record';
   public categories: Array<string> = ['record', 'info'];
+  tableid: number;
 
   constructor(public datepipe: DatePipe, public global: GlobalProvider, public navCtrl: NavController, public navParams: NavParams) {
   	this.id = navParams.get('id');
@@ -29,7 +30,9 @@ export class DetayPage {
   }
 
   openOnar() {
-    this.navCtrl.push(OnarımPage);
+    this.navCtrl.push(OnarımPage, {
+      tableid: this.tableid
+    });
   }
 
   onTabChanged(tabName) {
@@ -59,6 +62,7 @@ export class DetayPage {
         { key: 'Kontrol Açıklama', value: '' },
         { key: 'Parça Değişikliği', value: '' }
     ];
+      this.tableid = this.global.data.TABLEID;
     });
   }
 

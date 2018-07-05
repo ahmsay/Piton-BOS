@@ -9,13 +9,13 @@
 
 
 <ion-content padding class="bg">
-	<div *ngFor="let content of contents" style="background-color: #ffffff">
-		<ion-item style="padding-left: 10px" no-lines>{{content.category}}</ion-item>
-		<button text-left ion-button block color="gray" style="text-transform: none;" (click)="presentPopover($event, content)">{{content.choosed}}</button>
+	<div *ngFor="let content of contents">
+		<div padding style="padding-bottom: 15px; background-color: #ffffff">{{content.category}}</div>
+		<button text-left ion-button block color="gray" style="text-transform: none;" (click)="presentPopover($event, content)">{{content.choosed}}</button><br>
 	</div>
-		<ion-item no-lines>
-			Açıklama<br>{{explanation}}<br>Açıklama Ekle
-		</ion-item>
-		<ion-textarea cols="50" rows="5" style="border:solid 2px gray; border-radius: 3px;"></ion-textarea><br>
+		<div padding style="padding-bottom: 15px; background-color: #ffffff">
+			Açıklama<hr>{{explanation}}<hr>Açıklama Ekle<br><br>
+			<ion-textarea cols="50" rows="5" style="border:solid 2px gray; border-radius: 3px;"></ion-textarea>
+		</div>
 		<button ion-button block style="text-transform: none;">Kaydet</button>
 </ion-content>

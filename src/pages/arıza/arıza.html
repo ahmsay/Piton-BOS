@@ -10,9 +10,9 @@
 <ion-content padding class="bg">
   <div padding style="background-color: #ffffff">
       <div *ngFor="let content of contents">
-        <button ion-button block (click)="presentPopover($event, content)" color="gray" style="text-transform: none">{{content.choosed}}</button>
+        <button ion-button block [disabled]="display < content.required" (click)="presentPopover($event, content)" color="gray" style="text-transform: none">{{content.choosed}}</button>
       </div>
-      <button ion-button block color="gray" style="text-transform: none">İlgili Kişi</button>
+      <ion-item text-center>İlgili Kişi</ion-item>
       <ion-list no-margin *ngFor="let person of persons">
         <ion-item>
           <ion-label>{{person}}</ion-label>
