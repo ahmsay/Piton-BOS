@@ -20,6 +20,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any, show: string, icon: string}>;
   subPages: Array<{title: string, component: any, show: string}>;
+  currentPage: string = 'Anasayfa';
 
   constructor(public global: GlobalProvider, public menu: MenuController, public platform: Platform, public splashScreen: SplashScreen) {
     this.initializeApp();
@@ -49,18 +50,27 @@ export class MyApp {
   }
 
   managePage(page) {
-    if (page.title == 'Arıza İşlemleri') {
+    if (page.title == 'Anasayfa') {
+      this.nav.setRoot(HomePage);
+      this.currentPage = 'Anasayfa';
+      this.menu.close();
+    }
+    else if (page.title == 'Arıza İşlemleri') {
       this.changeShow();
     }
     else if (page.title == 'Çıkış Yap') {
+      this.currentPage = 'Anasayfa';
       if (this.subPages[0].show == '1')
         this.changeShow();
       this.menu.close();
       this.logout();
     }
     else {
+      if (this.currentPage != page.title) {
+        this.currentPage = page.title;
+        this.nav.push(page.component);
+      }
       this.menu.close();
-      this.nav.setRoot(page.component);
     }
   }
 

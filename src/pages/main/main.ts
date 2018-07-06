@@ -32,7 +32,7 @@ export class MainPage {
 
   openPage(button) {
   	if(button.name != '')
-  		this.navCtrl.setRoot(button.name);
+  		this.navCtrl.push(button.name);
   }
 
   getValues() {
