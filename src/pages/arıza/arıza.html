@@ -15,21 +15,21 @@
       <ion-item text-center>İlgili Kişi</ion-item>
       <ion-list no-margin *ngFor="let person of persons">
         <ion-item>
-          <ion-label>{{person}}</ion-label>
-          <ion-checkbox></ion-checkbox>
+          <ion-label>{{person.name}}</ion-label>
+          <ion-checkbox [(ngModel)]="person.checked"></ion-checkbox>
         </ion-item>
       </ion-list>
 
       <div>
       <br><div>Arıza Açıklama</div><br>
-      <ion-textarea cols="50" rows="5" style="border:solid 2px gray; border-radius: 3px;"></ion-textarea><br>
+      <ion-textarea [(ngModel)]="explanation" cols="50" rows="5" style="border:solid 2px gray; border-radius: 3px;"></ion-textarea><br>
       <div>Saha Ekibi Görüşü</div><br>
-      <ion-textarea cols="50" rows="5" style="border:solid 2px gray; border-radius: 3px;"></ion-textarea>
+      <ion-textarea [(ngModel)]="sahaExplanation" cols="50" rows="5" style="border:solid 2px gray; border-radius: 3px;"></ion-textarea>
 
       <ion-grid>
         <ion-row>
           <ion-col col-6>
-            <ion-checkbox></ion-checkbox>
+            <ion-checkbox [(ngModel)]="checked"></ion-checkbox>
           </ion-col>
           <ion-col col-6>
             <div text-right>Sorun Çözüldü</div>

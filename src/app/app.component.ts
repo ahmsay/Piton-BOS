@@ -66,10 +66,8 @@ export class MyApp {
       this.logout();
     }
     else {
-      if (this.currentPage != page.title) {
-        this.currentPage = page.title;
-        this.nav.push(page.component);
-      }
+      this.currentPage = page.title;
+      this.nav.push(page.component);
       this.menu.close();
     }
   }

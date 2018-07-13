@@ -36,9 +36,9 @@ export class HomePage {
     this.http.post(url, body, {'Content-Type': 'application/x-www-form-urlencoded'})
     .then((data) => {
       localStorage.setItem('logged', '1');
+      localStorage.setItem('user', uname);
       let x = JSON.parse(data.data);
       localStorage.setItem('token', x.access_token);
-      console.log(data);
       this.navCtrl.setRoot(MainPage);
     })
     .catch((error) => {

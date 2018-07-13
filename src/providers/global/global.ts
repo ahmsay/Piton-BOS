@@ -32,8 +32,32 @@ export class GlobalProvider {
     });
   }
 
-  postData() {
+  postData(url: string, body: any) {
+    return new Promise(resolve => {
+      this.http.post(url, body, {'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': 'Bearer ' + localStorage.getItem('token')})
+      .then((data) => {
+        let x = JSON.parse(data.data);
+        this.data = x;
+        resolve(this.data);
+      })
+      .catch((error) => {
+        let x = JSON.parse(error);
+        this.data = x;
+        resolve(this.data);
+      })
+    })
+  }
 
+  putData(url: string, body: any) {
+    return new Promise(resolve => {
+      this.http.put(url, body, {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token')})
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    })
   }
 
 }
