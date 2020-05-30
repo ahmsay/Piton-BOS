@@ -1,7 +1,7 @@
 # Piton-SOS
 Mobil Arıza Takip Sistemi
 
-# Screenshots
+## Screenshots
 <p>
   <img src="https://user-images.githubusercontent.com/22731894/79470896-9cfbd700-800a-11ea-8cc1-3412ce123cf6.png" width="290">
   <img src="https://user-images.githubusercontent.com/22731894/79456409-230e2280-7ff7-11ea-80a1-bac2124b1203.png" width="290">
